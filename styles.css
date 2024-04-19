@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+}
+
+nav {
+    background-color: #222;
+    padding: 20px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+.main-section {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.personagem-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+body {
+    background: linear-gradient(135deg, #bfbfbf 70%, #8c8c8c 40%);
+}
+
+/* Estilos adicionais para o scroll (Chrome e Safari) */
+::-webkit-scrollbar {
+    width: 10px; /* largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* cor do fundo da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #000; /* cor da barra de rolagem */
+}

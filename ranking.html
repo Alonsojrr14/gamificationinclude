@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+    <style>
+        /* Estilos CSS */
+        .chart-container {
+            position: relative;
+            margin-top: 20px;
+            height: 400px;
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .ranking-table {
+            width: 80%;
+            margin: 60px auto;
+            border-collapse: collapse;
+        }
+
+        .ranking-table th, .ranking-table td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .ranking-table th {
+            background-color: #f2f2f2;
+        }
+
+        /* Estilos adicionais para o gráfico */
+        .bar-label {
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            transform: rotate(-90deg);
+            text-align: center;
+            position: relative;
+            bottom: -10px; /* Ajuste vertical */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="ranking.html">Ranking</a></li>
+            <li><a href="fichas.html">Fichas</a></li>
+        </ul>
+    </nav>
+
+    <section class="main-section">
+        <div class="chart-container">
+            <canvas id="xpChart"></canvas>
+        </div>
+
+        <table class="ranking-table">
+            <thead>
+                <tr>
+                    <th>Posição</th>
+                    <th>Nome</th>
+                    <th>XP</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dados da tabela vão aqui -->
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ZeroByte. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Dados das fichas para o exemplo
+        const fichas = [
+            { nome: 'Zero', xp: 60 },
+            { nome: 'Personagem 2', xp: 50 },
+            { nome: 'Personagem 3', xp: 40 },
+            { nome: 'Personagem 4', xp: 30 },
+            { nome: 'Personagem 5', xp: 20 },
+            { nome: 'Personagem 6', xp: 10 },
+            { nome: 'Personagem 7', xp: 9 },
+            { nome: 'Personagem 8', xp: 8 },
+            { nome: 'Personagem 9', xp: 7 },
+            { nome: 'Personagem 10', xp: 6 },
+            { nome: 'Personagem 11', xp: 5 },
+            { nome: 'Personagem 12', xp: 4 },
+            { nome: 'Personagem 13', xp: 3 },
+            { nome: 'Personagem 14', xp: 2 },
+            { nome: 'Personagem 15', xp: 1 },
+            { nome: 'Personagem 16', xp: 0 },
+        ];
+
+        // Ordena as fichas por XP
+        fichas.sort((a, b) => b.xp - a.xp);
+
+        // Prepara os dados para o gráfico
+        const labels = ['', '', ''];
+        const data = [fichas[1].xp, fichas[0].xp, fichas[2].xp];
+
+        // Configurações do gráfico
+        const config = {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '',
+                    data: data,
+                    backgroundColor: '#f25221', // Cor sólida para a barra
+                    borderColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        display: false // Remove os valores numéricos do eixo Y
+                    },
+                    x: {
+                        grid: {
+                            display: false // Remove as linhas de grade do eixo X
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        enabled: true,
+                        callbacks: {
+                            label: (context) => {
+                                const index = context.dataIndex;
+                                const ficha = fichas[index === 1 ? 0 : index === 0 ? 1 : 2];
+                                return `${ficha.nome} - XP: ${ficha.xp}`;
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false // Remove a legenda
+                },
+                datalabels: {
+                    align: 'start',
+                    anchor: 'end',
+                    offset: -20,
+                    color: 'black',
+                    font: {
+                        weight: 'bold'
+                    },
+                    formatter: (value, context) => {
+                        const index = context.dataIndex;
+                        const text = fichas[index === 1 ? 0 : index === 0 ? 1 : 2].nome;
+                        return text;
+                    }
+                }
+            }
+        };
+
+        // Cria o gráfico
+        var myChart = new Chart(
+            document.getElementById('xpChart'),
+            config
+        );
+
+        // Preenche a tabela com os dados
+        const tableBody = document.querySelector('.ranking-table tbody');
+        fichas.forEach((ficha, index) => {
+            if (index < 3) return; // Apenas as três primeiras fichas têm barras no gráfico
+            const row = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${ficha.nome}</td>
+                    <td>${ficha.xp}</td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        });
+    </script>
+</body>
+</html>
