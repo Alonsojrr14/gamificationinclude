@@ -81,26 +81,28 @@
     <script>
         // Dados das fichas para o exemplo
         const fichas = [
-            { nome: 'Zero', xp: 60 },
-            { nome: 'Personagem 2', xp: 50 },
-            { nome: 'Personagem 3', xp: 40 },
-            { nome: 'Personagem 4', xp: 30 },
-            { nome: 'Personagem 5', xp: 20 },
-            { nome: 'Personagem 6', xp: 10 },
-            { nome: 'Personagem 7', xp: 9 },
-            { nome: 'Personagem 8', xp: 8 },
-            { nome: 'Personagem 9', xp: 7 },
-            { nome: 'Personagem 10', xp: 6 },
-            { nome: 'Personagem 11', xp: 5 },
-            { nome: 'Personagem 12', xp: 4 },
-            { nome: 'Personagem 13', xp: 3 },
-            { nome: 'Personagem 14', xp: 2 },
-            { nome: 'Personagem 15', xp: 1 },
-            { nome: 'Personagem 16', xp: 0 },
+            { nome: 'Alan Victor', xp: 30 },
+            { nome: 'Danilo Henrique', xp: 30 },
+            { nome: 'Ednardo', xp: 30 },
+            { nome: 'Rafael Dantas', xp: 30 },
+            { nome: 'Romeu Róseo', xp: 30 },
+            { nome: 'João Augusto', xp: 20 },
+            { nome: 'Alexsandro Martins', xp: 10 },
+            { nome: 'Ana Emilly', xp: 10 },
+            { nome: 'F. Henry', xp: 10 },
+            { nome: 'Levi Maia', xp: 10 },
+            { nome: 'Allan Warris', xp: 10 },
         ];
 
         // Ordena as fichas por XP
-        fichas.sort((a, b) => b.xp - a.xp);
+            fichas.sort((a, b) => {
+                if (b.xp !== a.xp) {
+                    return b.xp - a.xp;
+                }
+                return a.nome.localeCompare(b.nome);
+            });
+
+
 
         // Prepara os dados para o gráfico
         const labels = ['', '', ''];
